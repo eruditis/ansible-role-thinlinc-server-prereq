@@ -1,0 +1,66 @@
+---
+- name: Check if we can do a inventory
+  setup:
+    gather_subset: min
+  failed_when: false
+
+- block:
+
+  - name: Verify python installation
+    raw: python -V || python2 -V || python3 -V
+    failed_when: false
+    changed_when: false
+    register: python_installed
+  
+  - block:
+
+    - name: Check if we have zypper
+      raw: zypper -V 
+      register: zypper_rc
+      changed_when: false
+      failed_when: false
+      when: python is not defined
+  
+    - set_fact:
+        python: zypper install -y python python-xml
+      when: python is not defined and zypper_rc.rc == 0
+
+    - name: Check if we have apt
+      raw: apt --version
+      register: apt_rc
+      changed_when: false
+      failed_when: false
+      when: python is not defined
+  
+    - set_fact:
+        python: apt-get install python python-apt -y
+      when: python is not defined and apt_rc.rc == 0 
+  
+    - name: Check if we have yum
+      raw: yum --version
+      register: yum_rc
+      changed_when: false
+      failed_when: false
+      when: python is not defined
+  
+    - set_fact:
+        python: yum install python -y
+      when: python is not defined and yum_rc.rc == 0
+  
+    - name: install python
+      raw: "{{ python }}"
+      when: python is defined
+      failed_when: false
+  
+    when: python_installed.rc != 0
+  
+  - name: Init facts
+    setup:
+
+  when: ansible_distribution_file_variety is not defined
+
+- name: Trying to find distribution prerequisites 
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "pre_{{ ansible_distribution_file_variety | lower | map('trim') | join }}.yml"
+    - "default.yml"

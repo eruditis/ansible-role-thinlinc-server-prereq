@@ -1,0 +1,17 @@
+---
+# vars file for roles/ansible-role-thinlinc-server-prereq
+
+# Extra packages neede for Ubuntu Groovy
+
+groovy_packages:
+  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb"
+    sha256sum: "255d1b10fa52e4551eb330375e1a3324b9b9220d3242281e9cb3a60dc8b13b50"
+  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/p/pycairo/python-cairo_1.16.2-2ubuntu2_amd64.deb"
+    sha256sum: "2c953cfab659482f1d4ced08873956c79768a74785364aa97fee24f1654bceda"
+  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/p/pygobject-2/python-gobject-2_2.28.6-14ubuntu1_amd64.deb"
+    sha256sum: "ecd489f03797ffe85ebb34ae9dd1d833dbe584a54524c29977dc180ea4eebbbb"
+  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/libf/libffi7/libffi7_3.3-5ubuntu1_amd64.deb"
+    sha256sum: "3c88b15b507cdc86c1b79de991128bc26d0493e77ea1905eddd156d379ccdbab"
+  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/p/python-apt/python-apt_2.0.0ubuntu0.20.04.4_amd64.deb"
+    sha256sum: "fedd07186a4f09ba335f15c3a6565437ab9f1ef8804cefbe9f8bf5b617a541c3"
+

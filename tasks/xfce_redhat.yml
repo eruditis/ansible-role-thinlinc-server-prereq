@@ -1,0 +1,11 @@
+---
+
+- name: "Install epel on {{ ansible_distribution_file_variety }}"
+  yum:
+    name: epel-release
+    state: latest
+
+- name: "Install Xfce on {{ ansible_distribution_file_variety }}"
+  yum:
+    name: "@Xfce"
+    state: present

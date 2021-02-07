@@ -1,0 +1,17 @@
+---
+
+- name: Install Xfce on {{  ansible_distribution_file_variety }} ( {{ ansible_distribution_release }} )
+  apt:
+    pkg: 
+      - xfce4
+      - xfce4-terminal
+    update_cache: true
+  when: ( ansible_distribution_release is defined and 
+          ( 
+            ansible_distribution_release == "focal" or 
+            ansible_distribution_release == "stretch" or
+            ansible_distribution_release == "buster" or
+            ansible_distribution_release == "groovy" or
+            ansible_distribution_release == "bionic" 
+          )
+        )

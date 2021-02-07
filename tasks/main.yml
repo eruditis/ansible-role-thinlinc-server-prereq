@@ -1,0 +1,9 @@
+---
+# tasks file for ansible-role-thinlinc-server-prereq
+
+- name: Include distribution prerequisites tasks
+  include_tasks: pre_main.yml
+
+- name: Include xfce tasks
+  include_tasks: xfce_main.yml
+  when: install_xfce is defined and install_xfce == True

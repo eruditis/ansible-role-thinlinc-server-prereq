@@ -1,0 +1,42 @@
+---
+
+- debug: var=ansible_distribution_release
+
+#
+# Ubuntu
+#
+
+- name: Install prerequisites on ubuntu bionic
+  apt:
+    pkg:
+    - python-minimal
+    - python-apt
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "bionic" 
+
+- name: Install prerequisites on ubuntu focal
+  apt:
+    pkg:
+    - python2
+    - python-apt
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "focal" 
+
+- name: Include prerequisites on ubuntu groovy
+  include_tasks: pre_debian_groovy.yml
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "groovy" 
+
+#
+# Debian
+#
+
+- name: Install prerequisites on debian stretch
+  apt:
+    pkg:
+    - python-apt
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "stretch" 
+
+- name: Install prerequisites on debian buster
+  apt:
+    pkg:
+    - python-apt
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "buster" 
+

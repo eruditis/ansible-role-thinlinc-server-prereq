@@ -1,0 +1,7 @@
+---
+# defaults file for roles/ansible-role-thinlinc-server-prereq
+
+# Change this to true, if you want Xfce to be installed
+
+install_xfce: false
+
