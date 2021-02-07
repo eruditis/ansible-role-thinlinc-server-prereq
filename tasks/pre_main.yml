@@ -3,6 +3,11 @@
   setup:
     gather_subset: min
   failed_when: false
+  register: minimal
+
+#- debug: var=ansible_distribution_file_variety
+#- debug: var=minimal
+#- meta: end_play
 
 - block:
 
@@ -57,10 +62,15 @@
   - name: Init facts
     setup:
 
-  when: ansible_distribution_file_variety is not defined
+  when: ( ansible_distribution_file_variety is not defined ) or ( mininal.rc is defined and minimal.rc != 0 )
+
+- set_fact:
+     incname: "pre_{{ ansible_distribution_file_variety | lower | map('trim') | join }}.yml"
+
+- debug: var=incname
 
 - name: Trying to find distribution prerequisites 
   include_tasks: "{{ item }}"
   with_first_found:
-    - "pre_{{ ansible_distribution_file_variety | lower | map('trim') | join }}.yml"
+    - "{{ incname }}"
     - "default.yml"

@@ -1,0 +1,18 @@
+---
+
+- name: Install prerequisites on SUSE
+  package:
+    name:
+      - libssl45
+      - libgssglue1
+      - libX11-6
+      - xauth
+      - mozilla-nspr
+      - mozilla-nss
+      - ghostscript
+      - sendmail
+      - python2-ldap
+      - python
+      - python-xml
+    state: latest
+  when: ansible_distribution_major_version | int == 15
