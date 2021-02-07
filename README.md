@@ -10,9 +10,15 @@ Tested on containers:
  - ubuntu-20.04-standard (focal)
  - ubuntu-20-10-standard (groovy) # WARNING, Installing old python2 packages
  - opensuse-15.2-default
+ 
+Playbook Variables:
+```yaml
+  install_xfce: false  # Change to true if you want to install Xfce
+```
 
 Example playbook:
 
+```yaml
   ---
   - hosts: all
     gather_facts: false
@@ -20,3 +26,4 @@ Example playbook:
     roles:
       - { role: ansible-role-thinlinc-server-prereq, install_xfce: true }
       - { role: ansible-role-thinlinc-server, thinlinc_accept_eula: "yes", thinlinc_server_bundle: "/local/artifactory/tl-4.12.1-server.zip" }
+```
