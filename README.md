@@ -10,6 +10,9 @@ Tested on containers:
  - ubuntu-20.04-standard (focal)
  - ubuntu-20-10-standard (groovy) # WARNING, Installing old python2 packages
  - opensuse-15.2-default
+
+Tested on virtual machines:
+ - Linux Mint 20.1 (ulyssa) # WARNING, Installing old python2 packages
  
 Playbook Variables:
 ```yaml

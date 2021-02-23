@@ -1,0 +1,76 @@
+---
+
+- name: Install prerequisites on mint ulyssa
+  apt:
+    pkg:
+    - gnupg
+    - python2
+
+- name: Create temporary directory
+  tempfile:
+    state: directory
+  register: tmpdir
+
+- block:
+
+  - name: Download file with check (sha256)
+    get_url:
+      url: "{{ download.url }}"
+      dest: "{{ tmpdir.path }}" 
+      checksum: "sha256:{{ download.sha256sum }}"
+    with_items: "{{ groovy_packages }}"
+    loop_control:
+      loop_var: download
+
+  
+  - command: "/bin/ls {{ tmpdir.path }}"
+    register: ls
+  
+  - set_fact:
+      deb_pack: ""
+  
+  - set_fact:
+      deb_pack: "{{ deb_pack }} {{ tmpdir.path }}/{{ pkg_path }}"
+    with_items: "{{ ls.stdout_lines }}"
+    loop_control:
+      loop_var: pkg_path
+    when: ls.stdout_lines is defined
+  
+  - name: Install misc python2 packages (step 1)
+    command: 
+      cmd: "/usr/bin/apt-get install -y {{ deb_pack }}"
+      warn: false
+    register: debinstall
+    failed_when: false
+    when: deb_pack is defined
+  
+  - name: Remove temporary directory
+    file:
+      path: "{{ tmpdir.path }}"
+      state: absent
+
+  when: tmpdir.path is defined
+
+
+#- meta: end_play
+
+#- name: set fact
+#http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb
+#http://archive.ubuntu.com/ubuntu/pool/universe/p/pycairo/python-cairo_1.16.2-2ubuntu2_amd64.deb
+#http://archive.ubuntu.com/ubuntu/pool/universe/p/pygobject-2/python-gobject-2_2.28.6-14ubuntu1_amd64.deb
+#http://archive.ubuntu.com/ubuntu/pool/universe/libf/libffi7/libffi7_3.3-5ubuntu1_amd64.deb
+#http://archive.ubuntu.com/ubuntu/pool/universe/p/python-apt/python-apt_2.0.0ubuntu0.20.04.4_amd64.deb
+
+#3c88b15b507cdc86c1b79de991128bc26d0493e77ea1905eddd156d379ccdbab  libffi7_3.3-5ubuntu1_amd64.deb
+#fedd07186a4f09ba335f15c3a6565437ab9f1ef8804cefbe9f8bf5b617a541c3  python-apt_2.0.0ubuntu0.20.04.4_amd64.deb
+#2c953cfab659482f1d4ced08873956c79768a74785364aa97fee24f1654bceda  python-cairo_1.16.2-2ubuntu2_amd64.deb
+#ecd489f03797ffe85ebb34ae9dd1d833dbe584a54524c29977dc180ea4eebbbb  python-gobject-2_2.28.6-14ubuntu1_amd64.deb
+#255d1b10fa52e4551eb330375e1a3324b9b9220d3242281e9cb3a60dc8b13b50  python-gtk2_2.24.0-5.1ubuntu2_amd64.deb
+
+
+#
+#- name: Install prerequisites on ubuntu groovy
+#  apt:
+#    pkg:
+#    - python2
+#    - python-gtk2

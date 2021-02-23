@@ -25,6 +25,13 @@
   when:  ansible_distribution_release is defined and ansible_distribution_release == "groovy" 
 
 #
+# ulyssa
+#
+- name: Include prerequisites on mint ulyssa
+  include_tasks: pre_debian_ulyssa.yml
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "ulyssa" 
+
+#
 # Debian
 #
 

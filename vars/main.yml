@@ -15,3 +15,4 @@ groovy_packages:
   - url: "http://archive.ubuntu.com/ubuntu/pool/universe/p/python-apt/python-apt_2.0.0ubuntu0.20.04.4_amd64.deb"
     sha256sum: "fedd07186a4f09ba335f15c3a6565437ab9f1ef8804cefbe9f8bf5b617a541c3"
 
+ulyssa_packages: "{{ groovy_packages }}"
