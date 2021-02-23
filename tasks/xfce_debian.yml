@@ -1,7 +1,5 @@
 ---
 
-- debug: var=ansible_distribution_release
-
 - name: Install Xfce on {{  ansible_distribution_file_variety }} ( {{ ansible_distribution_release }} )
   apt:
     pkg: 
@@ -18,5 +16,3 @@
             ansible_distribution_release == "ulyssa" 
           )
         )
-
-- meta: end_play
