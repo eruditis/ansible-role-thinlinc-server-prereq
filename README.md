@@ -6,6 +6,7 @@ Tested on containers:
  - centos-8-default
  - debian-9.0-standard (stretch)
  - debian-10-standard (buster)
+ - ubuntu-16.04-standard (xenial)
  - ubuntu-18.04-standard (bionic)
  - ubuntu-20.04-standard (focal)
  - ubuntu-20-10-standard (groovy) # WARNING, Installing old python2 packages

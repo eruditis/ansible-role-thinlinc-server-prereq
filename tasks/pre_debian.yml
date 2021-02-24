@@ -6,6 +6,13 @@
 # Ubuntu
 #
 
+- name: Install prerequisites on ubuntu xenial
+  apt:
+    pkg:
+    - python-minimal
+    - python-apt
+  when:  ansible_distribution_release is defined and ansible_distribution_release == "xenial" 
+
 - name: Install prerequisites on ubuntu bionic
   apt:
     pkg:
