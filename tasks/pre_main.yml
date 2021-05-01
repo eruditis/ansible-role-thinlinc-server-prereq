@@ -5,9 +5,12 @@
   failed_when: false
   register: minimal
 
-#- debug: var=ansible_distribution_file_variety
-#- debug: var=minimal
-#- meta: end_play
+# https://github.com/ansible/ansible/pull/74530
+- name: Rocky Linux workaround
+  set_fact:
+    ansible_os_family: "RedHat"
+  when: ansible_distribution == "Rocky"
+
 
 - block:
 

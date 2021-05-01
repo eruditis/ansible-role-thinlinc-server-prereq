@@ -14,6 +14,7 @@ Tested on containers:
 
 Tested on virtual machines:
  - Linux Mint 20.1 (ulyssa) # WARNING, Installing old python2 packages
+ - Rocky Linux 8.3 ( https://rockylinux.org/ )
  
 Playbook Variables:
 ```yaml
