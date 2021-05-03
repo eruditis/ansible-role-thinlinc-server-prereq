@@ -1,0 +1,38 @@
+---
+- name: Check if we have zypper
+  raw: zypper -V 
+  register: zypper_rc
+  changed_when: false
+  failed_when: false
+  when: python is not defined
+
+- set_fact:
+    python: zypper install -y python python-xml
+  when: python is not defined and zypper_rc.rc == 0
+
+- name: Check if we have apt
+  raw: apt --version
+  register: apt_rc
+  changed_when: false
+  failed_when: false
+  when: python is not defined
+
+- set_fact:
+    python: apt-get install python python-apt -y
+  when: python is not defined and apt_rc.rc == 0 
+
+- name: Check if we have yum
+  raw: yum --version
+  register: yum_rc
+  changed_when: false
+  failed_when: false
+  when: python is not defined
+
+- set_fact:
+    python: yum install python -y
+  when: python is not defined and yum_rc.rc == 0
+
+- name: install python
+  raw: "{{ python }}"
+  when: python is defined
+  failed_when: false

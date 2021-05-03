@@ -16,7 +16,7 @@
       - python-xml
     state: latest
   when: ( ansible_distribution_major_version | int == 15 ) and
-        ( ansible_distribution is search("Opensuse") )
+        ( ansible_distribution | lower is search("opensuse") )
 
 ###########################################################################
 #
@@ -46,4 +46,4 @@
       - python-xml
     state: latest
   when: ( ansible_distribution_major_version | int == 15 ) and
-        ( ansible_distribution is search("SLES") )
+        ( ansible_distribution | lower is search("sles") )
