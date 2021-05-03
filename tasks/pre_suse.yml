@@ -1,6 +1,6 @@
 ---
 
-- name: Install prerequisites on SUSE
+- name: Install prerequisites on OpenSUSE
   package:
     name:
       - libssl45
@@ -15,4 +15,35 @@
       - python
       - python-xml
     state: latest
-  when: ansible_distribution_major_version | int == 15
+  when: ( ansible_distribution_major_version | int == 15 ) and
+        ( ansible_distribution is search("Opensuse") )
+
+###########################################################################
+#
+# on SUSE it's required to inlcude the following repos using SUSEConnect
+#
+# Desktop Applications Module 15 SP2 x86_64 
+# Activate with: SUSEConnect -p sle-module-desktop-applications/15.2/x86_64
+#
+# Python 2 Module 15 SP2 x86_64 
+# Activate with: SUSEConnect -p sle-module-python2/15.2/x86_64
+#
+# Check with: SUSEConnect --list
+#
+###########################################################################
+
+- name: Install prerequisites on SLES
+  package:
+    name:
+      - libgssglue1
+      - libX11-6
+      - xauth
+      - mozilla-nspr
+      - mozilla-nss
+      - ghostscript
+      - python2-ldap
+      - python
+      - python-xml
+    state: latest
+  when: ( ansible_distribution_major_version | int == 15 ) and
+        ( ansible_distribution is search("SLES") )
