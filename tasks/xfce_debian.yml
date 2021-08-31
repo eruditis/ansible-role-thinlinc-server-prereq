@@ -14,6 +14,7 @@
             ansible_distribution_release == "groovy" or
             ansible_distribution_release == "bionic" or
             ansible_distribution_release == "ulyssa" or
-            ansible_distribution_release == "xenial" 
+            ansible_distribution_release == "xenial" or
+            ansible_distribution_release == "bullseye" 
           )
         )

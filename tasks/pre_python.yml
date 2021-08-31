@@ -7,7 +7,8 @@
   when: python is not defined
 
 - set_fact:
-    python: zypper install -y python python-xml
+    #python: zypper install -y python python-xml
+    python: zypper install -y python3
   when: python is not defined and zypper_rc.rc == 0
 
 - name: Check if we have apt
@@ -18,7 +19,8 @@
   when: python is not defined
 
 - set_fact:
-    python: apt-get install python python-apt -y
+    #python: apt-get install python python-apt -y
+    python: apt-get install python3 
   when: python is not defined and apt_rc.rc == 0 
 
 - name: Check if we have yum
@@ -29,7 +31,8 @@
   when: python is not defined
 
 - set_fact:
-    python: yum install python -y
+    #python: yum install python -y
+    python: yum install python3 -y
   when: python is not defined and yum_rc.rc == 0
 
 - name: install python

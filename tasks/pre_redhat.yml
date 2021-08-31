@@ -1,9 +1,9 @@
 ---
 
-- name: "Install python2 on {{ ansible_distribution_file_variety }}"
+- name: "Install python3 on {{ ansible_distribution_file_variety }}"
   yum:
-    name: python2
+    name: python3
     state: latest
-  when: ansible_distribution_major_version | int == 8
+  when: ansible_distribution_major_version | int > 6
 
 

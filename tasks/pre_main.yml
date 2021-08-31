@@ -8,7 +8,8 @@
 - block:
 
   - name: Verify python installation
-    raw: python -V || python2 -V || python3 -V
+    #raw: python -V || python2 -V || python3 -V
+    raw: python3 -V
     failed_when: false
     changed_when: false
     register: python_installed
@@ -17,8 +18,12 @@
     include_tasks: pre_python.yml
     when: python_installed.rc != 0
   
+  - meta: clear_facts
+
   - name: Init facts
     setup:
+    #vars:
+    #      ansible_python_interpreter: /usr/bin/python3
 
   when: ( ansible_distribution_file_variety is not defined ) or ( minimal.rc is defined and minimal.rc != 0 )
 
