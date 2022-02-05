@@ -12,6 +12,7 @@ Installed Thinlinc 4.13.0 on containers:
  - centos-8-default
 
 Installed Thinlinc 4.13.0 on virtual machines:
+ - openSUSE Tumbleweed (20220202)
  - debian-11 (bullseye)
  - Rocky Linux 8.4 ( https://rockylinux.org/ )
  - AlmaLinux 8.4 ( https://almalinux.org/ )
