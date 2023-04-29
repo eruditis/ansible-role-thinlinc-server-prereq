@@ -15,6 +15,9 @@
             ansible_distribution_release == "bionic" or
             ansible_distribution_release == "ulyssa" or
             ansible_distribution_release == "xenial" or
-            ansible_distribution_release == "bullseye" 
+            ansible_distribution_release == "bullseye" or
+            ansible_distribution_release == "bookworm" or
+            ansible_distribution_release == "vera" or
+            ansible_distribution_release == "vanessa" 
           )
         )
