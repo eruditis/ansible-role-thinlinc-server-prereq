@@ -40,6 +40,9 @@
 - name: Copy /usr/etc/pam.d/sshd
   include_tasks: "copy_usr_etc_pam_sshd.yml"
 
+- name: Link /usr/etc/ssh/sshd_config
+  include_tasks: "link_usr_etc_sshd.yml"
+
 - name: Trying to find distribution prerequisites 
   include_tasks: "{{ item }}"
   with_first_found:

@@ -1,0 +1,24 @@
+---
+
+- name: Check /etc/ssh/sshd_config
+  stat:
+    path: /etc/ssh/sshd_config
+  register: etc_sshd_config
+
+- block:
+
+    - name: Check /usr/etc/ssh/sshd_config
+      stat:
+        path: /usr/etc/ssh/sshd_config
+      register: locate_sshd_config
+
+      #- debug: var=locate_sshd_config
+      
+    - name: Create a symbolic link
+      ansible.builtin.file:
+        src: "{{ locate_sshd_config.stat.path }}"
+        dest: "/etc/ssh/sshd_config"
+        state: link
+      when: locate_sshd_config.stat.exists is defined and locate_sshd_config.stat.exists == true
+
+  when: etc_sshd_config.stat.exists is defined and etc_sshd_config.stat.exists == false
